@@ -1,0 +1,16 @@
+{
+  "name": "rl-pixi-geotic",
+  "version": "0.0.1",
+  "description": "Small roguelike with PixiJS and Geotic (an ECS engine)",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run play"
+  },
+  "author": "Alexandre Baticle",
+  "license": "ISC",
+  "dependencies": {
+    "geotic": "^4.3.2",
+    "pixi.js": "^7.2.4",
+    "rot-js": "^2.2.0"
+  }
+}
