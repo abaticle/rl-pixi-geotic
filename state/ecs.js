@@ -30,9 +30,6 @@ export const createCamera = () => {
     })
 }
 
-
-
-
 export const createPlayer = (x = 0, y = 0) => {
     const player = world.createEntity()
 
@@ -43,11 +40,8 @@ export const createPlayer = (x = 0, y = 0) => {
     player.add(WorldPosition, {
         x,
         y
-    })
-
-    
+    })    
 }
-
 
 export const createRandomMap = (width = 50, height = 50) => {
     const {
