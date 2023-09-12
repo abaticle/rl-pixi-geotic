@@ -4,9 +4,10 @@ import { colors } from "../../lib/graphics.js"
 export default class Appearance extends Component {
 
     static properties = {
-      background: colors.defaultBGColor,
-      color: colors.defaultColor,
-      tile: 0
+      //background: colors.defaultBGColor,
+      //color: colors.defaultColor,
+      tile: 0,
+      sprite: undefined
     }
 
   }

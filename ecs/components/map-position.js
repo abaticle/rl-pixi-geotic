@@ -1,6 +1,6 @@
 import { Component } from "geotic";
 
-export default class WorldPosition extends Component {
+export default class MapPosition extends Component {
     // px, py = previous x, previous y
     static properties = { 
         x: 0, 

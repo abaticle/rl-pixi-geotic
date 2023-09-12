@@ -1,4 +1,6 @@
 export { default as Appearance } from "./appearance.js"
 export { default as Camera } from "./camera.js"
+export { default as Game } from "./game.js"
+export { default as Owned } from "./owned.js"
 export { default as Map } from "./map.js"
-export { default as WorldPosition } from "./world-position.js"
+export { default as MapPosition } from "./map-position.js"
