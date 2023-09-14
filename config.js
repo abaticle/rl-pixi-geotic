@@ -16,8 +16,16 @@ const GAME_STATE = {
 
 const TILE_SIZE = 16
 
+const DIRECTIONS = {
+    LEFT: "Left",
+    RIGHT: "Right",
+    TOP: "Top",
+    BOTTOM: "Bottom"
+}
+
 export {
     DEV,
+    DIRECTIONS,
     ROT_SEED,
     TILESET,
     GAME_STATE,

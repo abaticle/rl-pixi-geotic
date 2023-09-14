@@ -18,8 +18,6 @@ const moveCamera = (delta) => {
         mapPosition
     } = getPlayer()
 
-    console.log(mapPosition)
-
     container.position.set(mapPosition.x * TILE_SIZE * -1, mapPosition.y * TILE_SIZE * -1)
 
 }

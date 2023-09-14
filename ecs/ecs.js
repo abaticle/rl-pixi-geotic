@@ -10,7 +10,8 @@ import {
     Game,
     Owned,
     Map,
-    MapPosition
+    MapPosition,
+    Move
 } from "./components/_index.js"
 import { 
     GAME_STATE, 
@@ -23,6 +24,7 @@ let world
 let mapQuery 
 let playerQuery
 let cameraQuery
+let movableQuery
 
 
 
@@ -41,6 +43,7 @@ const createECS = () => {
     engine.registerComponent(Camera)
     engine.registerComponent(Map)
     engine.registerComponent(Owned)
+    engine.registerComponent(Move)
 
     mapQuery = world.createQuery({
         all: [Map]
@@ -53,13 +56,17 @@ const createECS = () => {
     cameraQuery = world.createQuery({
         all: [Camera]
     })
+
+    movableQuery = world.createQuery({
+        all: [Move]
+    })
         
     window.engine = engine
     window.world = world
 
     DEV ? console.log(`ECS created`, world) : undefined
 }
-
+createECS()
 /**
  * 
  * @param {Number} zoom 
@@ -160,6 +167,10 @@ const getCamera = () => {
     return cameraQuery.get()[0]
 }
 
+const getMovables = () => {
+    return movableQuery.get()
+}
+
 export {
     createCamera,
     createECS,
@@ -168,6 +179,7 @@ export {
     createPlayer,
     getCamera,
     getMap,
+    getMovables,
     getPlayer,
     world   
 }
