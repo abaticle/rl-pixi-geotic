@@ -1,24 +1,28 @@
 import {
-    world,
-    getCamera,
     getPlayer
 } from "../ecs.js"
 import {
-    container
+    container,
+    pixi
 } from "../../lib/graphics.js"
-import { TILE_SIZE } from "../../config.js"
 
-const moveCamera = (delta) => {
+const moveCamera = () => {
     
     const {
-        camera
-    } = getCamera()
-
-    const {
-        mapPosition
+        appearance
     } = getPlayer()
 
-    container.position.set(mapPosition.x * TILE_SIZE * -1, mapPosition.y * TILE_SIZE * -1)
+    const x = appearance.sprite.position.x
+    const y = appearance.sprite.position.y
+    
+    const width = window.innerWidth
+    const height = window.innerHeight
+    const scale = container.scale.x
+
+    const targetX = (width / 2) - x * scale
+    const targetY = (height / 2) - y * scale
+
+    container.position.set(targetX, targetY)
 
 }
 

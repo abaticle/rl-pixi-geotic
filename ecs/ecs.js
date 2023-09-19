@@ -8,10 +8,11 @@ import {
     Appearance,
     Camera,
     Game,
-    Owned,
+    Input,
     Map,
     MapPosition,
-    Move
+    Move,
+    Selected
 } from "./components/_index.js"
 import { 
     GAME_STATE, 
@@ -25,6 +26,7 @@ let mapQuery
 let playerQuery
 let cameraQuery
 let movableQuery
+let gameQuery
 
 
 
@@ -39,10 +41,12 @@ const createECS = () => {
     world = engine.createWorld()
     
     engine.registerComponent(Appearance)
-    engine.registerComponent(MapPosition)
     engine.registerComponent(Camera)
+    engine.registerComponent(Game)
+    engine.registerComponent(Input)
+    engine.registerComponent(MapPosition)
     engine.registerComponent(Map)
-    engine.registerComponent(Owned)
+    engine.registerComponent(Selected)
     engine.registerComponent(Move)
 
     mapQuery = world.createQuery({
@@ -50,7 +54,7 @@ const createECS = () => {
     })
 
     playerQuery = world.createQuery({
-        all: [Appearance, MapPosition, Owned]
+        all: [Appearance, MapPosition, Selected]
     })
 
     cameraQuery = world.createQuery({
@@ -60,13 +64,19 @@ const createECS = () => {
     movableQuery = world.createQuery({
         all: [Move]
     })
+
+    gameQuery = world.createQuery({
+        all: [Game]
+    })
         
     window.engine = engine
     window.world = world
 
     DEV ? console.log(`ECS created`, world) : undefined
 }
+
 createECS()
+
 /**
  * 
  * @param {Number} zoom 
@@ -94,6 +104,8 @@ const createGame = () => {
         turn: 0,
         state: GAME_STATE.CAN_PLAY
     })
+
+    game.add(Input)
     
     DEV ? console.log(`Game created`, game) : undefined
 }   
@@ -113,7 +125,9 @@ const createMap = (width = 50, height = 50) => {
 
     map.add(Map, {
         tiles,
-        rooms
+        rooms,
+        width,
+        height
     })
 
     
@@ -129,7 +143,7 @@ const createPlayer = (x = 0, y = 0) => {
     const player = world.createEntity()
 
     player.add(Appearance, {
-        tile: TILESET.PLAYER
+        tileIndex: TILESET.PLAYER
     })
 
     player.add(MapPosition, {
@@ -137,10 +151,13 @@ const createPlayer = (x = 0, y = 0) => {
         y
     })    
 
-    player.add(Owned, {})    
+    player.add(Selected, {})    
 
-    DEV ? console.log(`Player created ${player}`) : undefined
+    DEV ? console.log(`Player created`, player) : undefined
+
+    window.player = player
 }
+
 
 
 
@@ -167,19 +184,45 @@ const getCamera = () => {
     return cameraQuery.get()[0]
 }
 
+/**
+ * Get game
+ * @returns 
+ */
+const getGame = () => {
+    return gameQuery.get()[0]
+}
+
+const getGameState = () => {
+    const {
+        game
+    } = getGame()
+
+    return game.state
+}
+
+const setGameState = (state) => {    
+    const {
+        game
+    } = getGame()
+
+    game.state = state
+}
+
 const getMovables = () => {
     return movableQuery.get()
 }
 
 export {
     createCamera,
-    createECS,
     createGame,
     createMap,
     createPlayer,
     getCamera,
+    getGame,
+    getGameState,
     getMap,
     getMovables,
     getPlayer,
+    setGameState,
     world   
 }

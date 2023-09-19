@@ -6,7 +6,7 @@ export default class Appearance extends Component {
     static properties = {
       //background: colors.defaultBGColor,
       //color: colors.defaultColor,
-      tile: 0,
+      tileIndex: 0,
       sprite: undefined
     }
 
