@@ -17,6 +17,7 @@ const moveCamera = () => {
     
     const width = window.innerWidth
     const height = window.innerHeight
+    
     const scale = container.scale.x
 
     const targetX = (width / 2) - x * scale

@@ -1,8 +1,10 @@
 import {
     MapPosition,
+    Owned,
     Selected
 } from "../components/_index.js" 
 import {
+    getMonsters,
     getMap
 } from "../ecs.js"
 import {
@@ -12,8 +14,6 @@ import {
 const selectedQuery = world.createQuery({
     all: [Selected, MapPosition]
 })
-
-let first = true
 
 const updateVisibility = () => {
     const {
@@ -31,6 +31,12 @@ const updateVisibility = () => {
             tile.sprite.tint = 0x000000
         }
     })
+    
+    const entities = getMonsters()
+
+    entities.forEach((entity) => {
+        entity.appearance.sprite.visible = false
+    })
 
     selectedQuery.get().forEach(entity => {
         const {
@@ -42,6 +48,12 @@ const updateVisibility = () => {
         tiles.forEach(tile => {
             tile.sprite.tint = 0xffffff
             tile.visited = true
+
+            const monster = entities.find(entity => entity.mapPosition.x === tile.x && entity.mapPosition.y === tile.y)
+
+            if (monster) {
+                monster.appearance.sprite.visible = true
+            }
         })
     })
 }

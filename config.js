@@ -4,7 +4,7 @@ const SEE_EVERYTHING = false
 
 const DEFAULT_ZOOM = 2 
 
-const ROT_SEED = 26
+const ROT_SEED = 0
 
 const TILESET = {
     PLAYER: 0,

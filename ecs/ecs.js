@@ -12,6 +12,7 @@ import {
     Map,
     MapPosition,
     Move,
+    Owned,
     Selected
 } from "./components/_index.js"
 import { 
@@ -26,6 +27,8 @@ let mapQuery
 let playerQuery
 let cameraQuery
 let movableQuery
+let monstersQuery
+let drawablesQuery
 let gameQuery
 
 
@@ -48,6 +51,7 @@ const createECS = () => {
     engine.registerComponent(Map)
     engine.registerComponent(Selected)
     engine.registerComponent(Move)
+    engine.registerComponent(Owned)
 
     mapQuery = world.createQuery({
         all: [Map]
@@ -67,6 +71,15 @@ const createECS = () => {
 
     gameQuery = world.createQuery({
         all: [Game]
+    })
+
+    drawablesQuery = world.createQuery({
+        all: [Appearance, MapPosition]
+    })
+
+    monstersQuery = world.createQuery({
+        all: [Appearance, MapPosition],
+        not: [Owned]
     })
         
     window.engine = engine
@@ -151,76 +164,64 @@ const createPlayer = (x = 0, y = 0) => {
         y
     })    
 
-    player.add(Selected, {})    
+    player.add(Owned)
+
+    player.add(Selected)    
 
     DEV ? console.log(`Player created`, player) : undefined
 
     window.player = player
 }
 
+const createMonsters = (number) => {
+
+    for (let i = 0; i < number; i++) {
+
+        const monster = world.createEntity()
+
+        const {
+            x,
+            y
+        } = getMap().map.getRandomPositionInRoom()
 
 
+        monster.add(Appearance, {
+            tileIndex: TILESET.MONSTER
+        })
+    
+        monster.add(MapPosition, {
+            x,
+            y
+        })    
+    }
 
-/**
- * Get map
- */
-const getMap = () => {
-    return mapQuery.get()[0]
+
 }
 
-/**
- * Get player
- * @returns 
- */
-const getPlayer = () => {
-    return playerQuery.get()[0]
-}
 
-/**
- * Get camera
- * @returns 
- */
-const getCamera = () => {
-    return cameraQuery.get()[0]
-}
+const getCamera = () => cameraQuery.get()[0]
+const getGame = () => gameQuery.get()[0]
+const getGameState = () => getGame().game.state
+const getDrawables = () => drawablesQuery.get()
+const getMap = () => mapQuery.get()[0]
+const getMonsters = () => monstersQuery.get()
+const getMovables = () => movableQuery.get()
+const getPlayer = () => playerQuery.get()[0]
 
-/**
- * Get game
- * @returns 
- */
-const getGame = () => {
-    return gameQuery.get()[0]
-}
-
-const getGameState = () => {
-    const {
-        game
-    } = getGame()
-
-    return game.state
-}
-
-const setGameState = (state) => {    
-    const {
-        game
-    } = getGame()
-
-    game.state = state
-}
-
-const getMovables = () => {
-    return movableQuery.get()
-}
+const setGameState = (state) => getGame().state = state
 
 export {
     createCamera,
     createGame,
     createMap,
+    createMonsters,
     createPlayer,
     getCamera,
+    getDrawables,
     getGame,
     getGameState,
     getMap,
+    getMonsters,
     getMovables,
     getPlayer,
     setGameState,

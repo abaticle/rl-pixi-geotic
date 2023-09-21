@@ -38,8 +38,7 @@ export default class Map extends Component {
         }
         catch (e) {
             console.log(e)
-        }
-        
+        }        
     }
 
     canMove(x, y) {
@@ -79,7 +78,9 @@ export default class Map extends Component {
 
         const fov = new FOV.PreciseShadowcasting((x, y) => {
 
-            if (x < 0 || y < 0 || x > this.width - 1 || y > this.height - 1) return false
+            if (x < 0 || y < 0 || x > this.width - 1 || y > this.height - 1) {
+                return false
+            }
 
             const {
                 tileIndex
