@@ -1,15 +1,15 @@
 import {
     MapPosition,
-    Owned,
     Selected
-} from "../components/_index.js" 
+} from '../components/_index.js' 
 import {
     getMonsters,
     getMap
-} from "../ecs.js"
+} from '../ecs.js'
 import {
+    TINTS,
     SEE_EVERYTHING
-} from "../../config.js"
+} from '../../config.js'
 
 const selectedQuery = world.createQuery({
     all: [Selected, MapPosition]
@@ -23,18 +23,19 @@ const updateVisibility = () => {
     // For debugging purposes
     if (SEE_EVERYTHING) return
 
+
     // Set tint on all tiles
     map.getAllTiles().forEach(tile => {
         if (tile.visited) {
-            tile.sprite.tint = 0x1c1c1c
+            tile.sprite.tint = TINTS.VISITED
         } else {
-            tile.sprite.tint = 0x000000
+            tile.sprite.tint = TINTS.HIDDEN
         }
     })
     
-    const entities = getMonsters()
+    const monsters = getMonsters()
 
-    entities.forEach((entity) => {
+    monsters.forEach((entity) => {
         entity.appearance.sprite.visible = false
     })
 
@@ -46,13 +47,15 @@ const updateVisibility = () => {
         const tiles = map.getVisibleTiles(mapPosition.x, mapPosition.y)
 
         tiles.forEach(tile => {
-            tile.sprite.tint = 0xffffff
+            tile.sprite.tint = TINTS.VISIBLE
             tile.visited = true
 
-            const monster = entities.find(entity => entity.mapPosition.x === tile.x && entity.mapPosition.y === tile.y)
+            const monster = monsters.find(entity => entity.mapPosition.x === tile.x && entity.mapPosition.y === tile.y)
 
             if (monster) {
                 monster.appearance.sprite.visible = true
+                monster.appearance.sprite.tint = TINTS.MONSTER
+                monster.brain.active = true
             }
         })
     })

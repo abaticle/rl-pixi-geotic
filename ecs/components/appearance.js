@@ -1,11 +1,8 @@
-import { Component } from "geotic"
-import { colors } from "../../lib/graphics.js"
+import { Component } from 'geotic'
 
 export default class Appearance extends Component {
 
     static properties = {
-      //background: colors.defaultBGColor,
-      //color: colors.defaultColor,
       tileIndex: 0,
       sprite: undefined
     }

@@ -1,5 +1,5 @@
-import { Component } from "geotic";
-import { DIRECTIONS } from "../../config";
+import { Component } from 'geotic';
+import { DIRECTIONS } from '../../config';
 
 export default class MapPosition extends Component {
     // px, py = previous x, previous y

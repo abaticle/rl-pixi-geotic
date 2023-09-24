@@ -2,7 +2,8 @@ const DEV = true
 
 const SEE_EVERYTHING = false
 
-const DEFAULT_ZOOM = 2 
+const ZOOM_GAME = 2
+const ZOOM_UI = 1
 
 const ROT_SEED = 0
 
@@ -19,30 +20,48 @@ const TILESET = {
     UI_PANEL_RIGHT: 12,
     UI_PANEL_BOTTOM_LEFT: 13,
     UI_PANEL_BOTTOM: 14,
-    UI_PANEL_BOTTOM_RIGHT: 15
+    UI_PANEL_BOTTOM_RIGHT: 15,
+    MOUSE_POINTER: 16
+}
+
+const TINTS = {
+    VISITED: 0x1c1c1c,
+    VISIBLE: 0xffffff,
+    HIDDEN:  0x000000,
+    MONSTER: 0xf20707
 }
 
 const GAME_STATE = {
-    CAN_PLAY: "Can play",
-    WAIT: "Wait"
+    WAIT_FOR_INPUT: 'Wait for player input',
+    PROCESS_INPUT: 'Process input', 
+    ANIMATING: 'Animating sprites'
+}
+
+const MONSTER_STATE = {
+    SEEKING: "Seeking"
 }
 
 const TILE_SIZE = 16
 
 const DIRECTIONS = {
-    LEFT: "Left",
-    RIGHT: "Right",
-    TOP: "Top",
-    BOTTOM: "Bottom"
+    LEFT: 'Left',
+    RIGHT: 'Right',
+    TOP: 'Top',
+    BOTTOM: 'Bottom'
 }
+
+const MOVE_DURATION = 500
 
 export {
     DEV,
-    DEFAULT_ZOOM,
     DIRECTIONS,
+    GAME_STATE,
+    MOVE_DURATION,
     ROT_SEED,
     SEE_EVERYTHING,
+    TILE_SIZE,
     TILESET,
-    GAME_STATE,
-    TILE_SIZE
+    TINTS,
+    ZOOM_GAME,
+    ZOOM_UI
 }

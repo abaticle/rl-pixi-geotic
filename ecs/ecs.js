@@ -1,25 +1,28 @@
 import { 
     Engine  
-} from "geotic"
+} from 'geotic'
 import {
     getRandomMap
-} from "../lib/utils.js"
+} from '../lib/utils.js'
 import {
+    Animation,
     Appearance,
+    Brain,
     Camera,
     Game,
+    Health,
     Input,
     Map,
-    MapPosition,
+    MapPosition,    
     Move,
     Owned,
     Selected
-} from "./components/_index.js"
+} from './components/_index.js'
 import { 
     GAME_STATE, 
     TILESET,
     DEV
-} from "../config.js"
+} from '../config.js'
 
 let engine 
 let world 
@@ -44,14 +47,17 @@ const createECS = () => {
     world = engine.createWorld()
     
     engine.registerComponent(Appearance)
+    engine.registerComponent(Brain)
     engine.registerComponent(Camera)
     engine.registerComponent(Game)
+    engine.registerComponent(Health)
     engine.registerComponent(Input)
     engine.registerComponent(MapPosition)
     engine.registerComponent(Map)
-    engine.registerComponent(Selected)
     engine.registerComponent(Move)
     engine.registerComponent(Owned)
+    engine.registerComponent(Selected)
+    engine.registerComponent(Animation)
 
     mapQuery = world.createQuery({
         all: [Map]
@@ -78,14 +84,12 @@ const createECS = () => {
     })
 
     monstersQuery = world.createQuery({
-        all: [Appearance, MapPosition],
+        all: [Appearance, MapPosition, Brain],
         not: [Owned]
     })
         
     window.engine = engine
     window.world = world
-
-    DEV ? console.log(`ECS created`, world) : undefined
 }
 
 createECS()
@@ -103,8 +107,6 @@ const createCamera = (zoom = 1) => {
         y: 0,
         zoom
     })
-
-    DEV ? console.log(`Camera created`, camera) : undefined
 }
 
 /**
@@ -115,12 +117,10 @@ const createGame = () => {
 
     game.add(Game, {
         turn: 0,
-        state: GAME_STATE.CAN_PLAY
+        state: GAME_STATE.WAIT_FOR_INPUT
     })
 
     game.add(Input)
-    
-    DEV ? console.log(`Game created`, game) : undefined
 }   
 
 /**
@@ -129,12 +129,12 @@ const createGame = () => {
  * @param {Number} height 
  */
 const createMap = (width = 50, height = 50) => {
+    const map = world.createEntity() 
+
     const {
         tiles,
         rooms
     } = getRandomMap(width, height)
-
-    const map = world.createEntity() 
 
     map.add(Map, {
         tiles,
@@ -142,9 +142,6 @@ const createMap = (width = 50, height = 50) => {
         width,
         height
     })
-
-    
-    DEV ? console.log(`Map created`, map) : undefined
 }
 
 /**
@@ -168,7 +165,10 @@ const createPlayer = (x = 0, y = 0) => {
 
     player.add(Selected)    
 
-    DEV ? console.log(`Player created`, player) : undefined
+    player.add(Health, {
+        max: 10,
+        current: 10
+    })
 
     window.player = player
 }
@@ -193,6 +193,13 @@ const createMonsters = (number) => {
             x,
             y
         })    
+
+        monster.add(Health, {
+            max: 4,
+            current: 4
+        })
+
+        monster.add(Brain)
     }
 
 
@@ -208,7 +215,12 @@ const getMonsters = () => monstersQuery.get()
 const getMovables = () => movableQuery.get()
 const getPlayer = () => playerQuery.get()[0]
 
-const setGameState = (state) => getGame().state = state
+const setGameState = (state) => {
+    const { game } = getGame() 
+
+    game.state = state
+
+}
 
 export {
     createCamera,

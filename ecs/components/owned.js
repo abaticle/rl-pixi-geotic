@@ -1,4 +1,4 @@
-import { Component } from "geotic"
+import { Component } from 'geotic'
 
 export default class Owned extends Component {
     

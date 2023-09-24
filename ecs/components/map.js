@@ -1,12 +1,15 @@
-import { Component } from "geotic"
-import { TILESET } from "../../config"
+import { Component } from 'geotic'
+import { TILESET } from '../../config'
 import {
     FOV
-} from "rot-js"
-import { container } from "../../lib/graphics.js"
+} from 'rot-js'
+import { container } from '../../lib/graphics.js'
 import {
     getRandomInt
-} from "../../lib/utils.js"
+} from '../../lib/utils.js'
+import {
+    getDrawables
+} from '../ecs.js'
 
 export default class Map extends Component {
     static properties = {
@@ -41,10 +44,24 @@ export default class Map extends Component {
         }        
     }
 
+
+    getEntityAt(x, y) {
+        return getDrawables().find(({mapPosition}) => mapPosition.x === x && mapPosition.y === y)
+    }
+
     canMove(x, y) {
+
+        // Check wall 
         const {tileIndex} = this.getTileAt(x, y)
 
         if (tileIndex === TILESET.WALL) {
+            return false
+        }
+
+        // Check monster 
+        const entity = this.getEntityAt(x, y)
+
+        if (entity) {
             return false
         }
 
