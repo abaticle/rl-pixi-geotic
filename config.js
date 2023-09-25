@@ -2,10 +2,10 @@ const DEV = true
 
 const SEE_EVERYTHING = false
 
-const ZOOM_GAME = 2
+const ZOOM_GAME = 3
 const ZOOM_UI = 1
 
-const ROT_SEED = 0
+const ROT_SEED = 12
 
 const TILESET = {
     PLAYER: 0,
@@ -32,13 +32,16 @@ const TINTS = {
 }
 
 const GAME_STATE = {
+    START: 'Start',
     WAIT_FOR_INPUT: 'Wait for player input',
     PROCESS_INPUT: 'Process input', 
     ANIMATING: 'Animating sprites'
 }
 
 const MONSTER_STATE = {
-    SEEKING: "Seeking"
+    WANDERING: "Wandering",
+    SEEKING: "Seeking",
+    ESCAPING: "Escaping"
 }
 
 const TILE_SIZE = 16
@@ -50,12 +53,13 @@ const DIRECTIONS = {
     BOTTOM: 'Bottom'
 }
 
-const MOVE_DURATION = 500
+const MOVE_DURATION = 1500
 
 export {
     DEV,
     DIRECTIONS,
     GAME_STATE,
+    MONSTER_STATE,
     MOVE_DURATION,
     ROT_SEED,
     SEE_EVERYTHING,
