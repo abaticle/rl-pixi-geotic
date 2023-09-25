@@ -2,10 +2,10 @@ const DEV = true
 
 const SEE_EVERYTHING = false
 
-const ZOOM_GAME = 3
+const ZOOM_GAME = 2
 const ZOOM_UI = 1
 
-const ROT_SEED = 12
+const ROT_SEED = 13
 
 const TILESET = {
     PLAYER: 0,
@@ -35,6 +35,7 @@ const GAME_STATE = {
     START: 'Start',
     WAIT_FOR_INPUT: 'Wait for player input',
     PROCESS_INPUT: 'Process input', 
+    PROCESS_AI: 'Process AI',
     ANIMATING: 'Animating sprites'
 }
 
@@ -53,7 +54,7 @@ const DIRECTIONS = {
     BOTTOM: 'Bottom'
 }
 
-const MOVE_DURATION = 1500
+const MOVE_DURATION = 500
 
 export {
     DEV,
