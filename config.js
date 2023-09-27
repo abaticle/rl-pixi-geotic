@@ -2,10 +2,15 @@ const DEV = true
 
 const SEE_EVERYTHING = false
 
-const ZOOM_GAME = 2
+const ZOOM_GAME = 1
 const ZOOM_UI = 1
 
 const ROT_SEED = 13
+
+const ANIMATION_TYPE = {
+    COLOR: "Color",
+    MOVE: "Move"
+}
 
 const TILESET = {
     PLAYER: 0,
@@ -25,10 +30,10 @@ const TILESET = {
 }
 
 const TINTS = {
-    VISITED: 0x1c1c1c,
-    VISIBLE: 0xffffff,
-    HIDDEN:  0x000000,
-    MONSTER: 0xf20707
+    VISITED: "#1c1c1c",
+    VISIBLE: "#ffffff",
+    HIDDEN:  "#000000",
+    MONSTER: "#f20707"
 }
 
 const GAME_STATE = {
@@ -54,11 +59,14 @@ const DIRECTIONS = {
     BOTTOM: 'Bottom'
 }
 
-const MOVE_DURATION = 500
+const MOVE_DURATION = 10
+const DISPLAY_DURATION = 40
 
-export {
+export { 
+    ANIMATION_TYPE,
     DEV,
     DIRECTIONS,
+    DISPLAY_DURATION,
     GAME_STATE,
     MONSTER_STATE,
     MOVE_DURATION,
