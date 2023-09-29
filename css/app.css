@@ -1,6 +1,10 @@
 body {
     overflow: hidden;
 }
+canvas{  
+    transform-origin: 0 0;
+    image-rendering: 'pixelated';
+}
 
 #game {
     width: 100%;

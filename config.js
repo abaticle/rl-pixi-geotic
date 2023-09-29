@@ -2,7 +2,7 @@ const DEV = true
 
 const SEE_EVERYTHING = false
 
-const ZOOM_GAME = 1
+const ZOOM_GAME = 3
 const ZOOM_UI = 1
 
 const ROT_SEED = 13
@@ -12,11 +12,17 @@ const ANIMATION_TYPE = {
     MOVE: "Move"
 }
 
+const ACTION_TYPE = {
+    OPEN_DOOR: "open_door"
+}
+
 const TILESET = {
     PLAYER: 0,
     MONSTER: 1,
     WALL: 3,
     FLOOR: 4,
+    DOOR_CLOSED: 5,
+    DOOR_OPEN: 6,
     UI_PANEL_TOP_LEFT: 7,
     UI_PANEL_TOP: 8,
     UI_PANEL_TOP_RIGHT: 9,
@@ -27,6 +33,13 @@ const TILESET = {
     UI_PANEL_BOTTOM: 14,
     UI_PANEL_BOTTOM_RIGHT: 15,
     MOUSE_POINTER: 16
+}
+
+const TILE_TYPE = {
+    DOOR_CLOSED: "door_closed",
+    DOOR_OPEN: "door_open",
+    WALL: "wall",
+    FLOOR: "floor"
 }
 
 const TINTS = {
@@ -63,6 +76,7 @@ const MOVE_DURATION = 10
 const DISPLAY_DURATION = 40
 
 export { 
+    ACTION_TYPE,
     ANIMATION_TYPE,
     DEV,
     DIRECTIONS,
@@ -73,6 +87,7 @@ export {
     ROT_SEED,
     SEE_EVERYTHING,
     TILE_SIZE,
+    TILE_TYPE,
     TILESET,
     TINTS,
     ZOOM_GAME,
