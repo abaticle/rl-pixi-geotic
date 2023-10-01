@@ -9,7 +9,8 @@ let ROT_SEED = 13
 
 const ANIMATION_TYPE = {
     COLOR: "Color",
-    MOVE: "Move"
+    MOVE: "Move",
+    SHAKE: "Shake"
 }
 
 const ACTION_TYPE = {

@@ -16,7 +16,8 @@
     "js-easing-functions": "^1.0.3",
     "parcel": "^2.9.3",
     "pixi.js": "^7.2.4",
-    "rot-js": "^2.2.0"
+    "rot-js": "^2.2.0",
+    "screen-shake": "^0.0.5"
   },
   "devDependencies": {
     "process": "^0.11.10"
