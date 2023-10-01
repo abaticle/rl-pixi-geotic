@@ -5,7 +5,7 @@ const SEE_EVERYTHING = false
 const ZOOM_GAME = 3
 const ZOOM_UI = 1
 
-const ROT_SEED = 13
+let ROT_SEED = 13
 
 const ANIMATION_TYPE = {
     COLOR: "Color",
@@ -13,7 +13,8 @@ const ANIMATION_TYPE = {
 }
 
 const ACTION_TYPE = {
-    OPEN_DOOR: "open_door"
+    OPEN_DOOR: "open_door",
+    ATTACK_MELEE: "attack_melee"
 }
 
 const TILESET = {
@@ -32,7 +33,8 @@ const TILESET = {
     UI_PANEL_BOTTOM_LEFT: 13,
     UI_PANEL_BOTTOM: 14,
     UI_PANEL_BOTTOM_RIGHT: 15,
-    MOUSE_POINTER: 16
+    MOUSE_POINTER: 16,
+    MONSTER_DEAD: 17
 }
 
 const TILE_TYPE = {

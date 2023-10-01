@@ -10,6 +10,7 @@
   "author": "Alexandre Baticle",
   "license": "ISC",
   "dependencies": {
+    "@pixi/sound": "^5.2.1",
     "@pixi/tilemap": "^4.0.0",
     "geotic": "^4.3.2",
     "js-easing-functions": "^1.0.3",
