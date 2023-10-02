@@ -49,7 +49,8 @@ const TINTS = {
     VISITED: "#1c1c1c",
     VISIBLE: "#ffffff",
     HIDDEN:  "#000000",
-    MONSTER: "#f20707"
+    MONSTER: "#f20707",
+    POINTER: "#02ff00"
 }
 
 const GAME_STATE = {
